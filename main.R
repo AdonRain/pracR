@@ -5,3 +5,12 @@ import <- function (pkgs){
 
   sapply(pkgs, require, character.only = TRUE)
 }
+
+import(c('rmarkdown', 'knitr'));
+
+render <- function (s){
+  src <- paste('src/prac-', s, '.rmd', sep = '');
+  dist <- paste('dist/prac-', s, '.md', sep = '');
+
+  knit(src, dist);
+}

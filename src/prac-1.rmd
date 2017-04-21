@@ -1,0 +1,45 @@
+---
+title: 2到11个人里同一星座出现的概率
+output: md_document
+---
+
+## 先找到计算公式
+
+```{r}
+get_prob <- function(n) {
+  # 基本事件总数
+  all_events <- 12 ^ n;
+
+  # 生日不重复的数量
+  no_repeat <- factorial(12) / factorial(12 - n);
+
+  round(1 - no_repeat / all_events, 4);
+}
+```
+
+## 存储10到100的样本
+
+```{r}
+df <- data.frame(students = c(2:11));
+
+df;
+```
+
+## 计算每个样本对应的概率
+
+```{r}
+df$prob <- get_prob(df$students);
+
+df;
+```
+
+## 绘制概率变化图
+
+```{r prac-1, fig.path='../figure/'}
+
+library('ggplot2');
+
+ggplot(df, aes(x = students, y = prob)) +
+  geom_point() +
+  theme_minimal();
+```
