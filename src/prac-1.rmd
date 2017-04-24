@@ -1,6 +1,6 @@
 ---
 title: 2到11个人里同一星座出现的概率
-output: md_document
+output: html_document
 ---
 
 ## 先找到计算公式
@@ -35,7 +35,7 @@ df;
 
 ## 绘制概率变化图
 
-```{r prac-1, fig.path='../figure/'}
+```{r}
 
 library('ggplot2');
 

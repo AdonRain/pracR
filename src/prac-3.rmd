@@ -1,0 +1,38 @@
+---
+title: 全概率公式和贝叶斯公式
+output: html_document
+---
+
+## 数据整理
+
+```{r}
+d <- data.frame(factory = c(1:3),
+  inferior = c(0.02, 0.01, 0.03),
+  share = c(0.15, 0.80, 0.05));
+
+d;
+```
+
+## 取到次品的概率
+
+```{r}
+# 全概率公式
+
+p_inferior <- function(d) {
+  sum(d$share * d$inferior);
+};
+
+p_inferior(d);
+```
+
+## 若取到次品，该次品是一厂生产的概率
+
+```{r}
+# 贝叶斯公式
+
+p1 <- function(d, i) {
+  (d$share[i] * d$inferior[i]) / p_inferior(d);
+}
+
+p1(d, 1);
+```

@@ -1,6 +1,6 @@
 ---
 title: 在1~2000的整数中任取一个，既不能被6又不能被8整除的概率
-output: md_document
+output: html_document
 ---
 
 ## 被n整除的概率

@@ -1,0 +1,30 @@
+---
+title: n重伯努利实验
+output: html_document
+---
+
+## 一批产品的一级品率为0.2，随机取20只，恰有k只为一级品的概率
+
+```{r}
+# X ~ b(20, 0.4);
+
+p_xk <- function (k){
+  choose(20, k) * 0.4^k * (1-0.4)^(20-k);
+}
+
+dis <- p_xk(c(1:20));
+
+dis;
+```
+
+## 画出分布曲线
+
+```{r}
+library('ggplot2');
+
+d <- data.frame(k = c(1:20), p = dis);
+
+ggplot(d, aes(x = k, y = p)) +
+  geom_bar(stat = 'identity') +
+  theme_minimal();
+```
