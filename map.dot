@@ -1,0 +1,116 @@
+digraph pracR{
+  /*plotmath*/
+
+  factorial[label="阶乘:\n factorial(n)"];
+  choose[label="组合:\n choose(n, k)"];
+  array[label="排列:\n factorial(k) * choose(n, k)"]
+
+  factorial -> array;
+  choose -> array;
+
+  distribution[label="分布律"];
+
+  d[label="概率密度:\n d...()"];
+  p[label="累积概率:\n p...()"];
+  q[label="分位点:\n q...()"];
+  r[label="随机数:\n r...()"];
+
+  d -> distribution;
+  p -> distribution;
+  q -> distribution;
+  r -> distribution;
+
+  binom[label="二项分布:\n X~b(n, p)"];
+  pois[label="泊松分布:\n X~pi(lambda)"];
+  norm[label="正态分布:\n X~N(mean, sd^2)"];
+  unif[label="均匀分布:\n X~U(a, b)"];
+  exp[label="指数分布(无记忆性):\n X~Exp(rate)"];
+  t[label="t分布:\n t~t(n)"];
+  chisq[label="卡方分布:\n chisq^2~hisq^2(n)"];
+  F[label="F分布:\n F~F(n1, n2)"];
+
+  distribution -> binom[style="dashed"];
+  distribution -> pois[style="dashed"];
+  distribution -> norm[style="dashed"];
+  distribution -> unif[style="dashed"];
+  distribution -> exp[style="dashed"];
+  distribution -> t[style="dashed"];
+  distribution -> chisq[style="dashed"];
+  distribution -> F[style="dashed"];
+
+  choose -> binom;
+  factorial -> pois;
+
+  binom -> pois[label="n >= 20,\n p <= 0.05,\n pi(n * p)"];
+  binom -> norm[label="n充分大,\n p不接近于0也不接近于1,\n N(np, np(1-p))"];
+  pois -> norm[label="n充分大,\n p不接近于0也不接近于1,\n N(lambda, lambda)"];
+
+  mean[label="期望:\n mean(c(1:10))"];
+  var[label="方差:\n var(c(1:10))"];
+  sd[label="标准差:\n sd(c(1:10))"];
+  cov[label="协方差:\n cov(c(1:10), c(11:20))"];
+  cor[label="相关系数:\n cor(c(1:10), c(11:20))"];
+
+  mean -> var -> sd -> cov -> cor;
+
+  sample[label="随机抽样:\n sample(1:10, 3, replace=F)"];
+  strata[label="分层抽样:\n sampling::strata()"];
+  cluster[label="整群抽样:\n sampling::cluster()"];
+
+  statistic[label="统计量"];
+
+  smean[label="样本均值"];
+  srate[label="样本比率"];
+  svar[label="样本方差"];
+
+  sample -> statistic;
+  strata -> statistic;
+  cluster -> statistic;
+
+  mean -> smean;
+  var -> svar;
+
+  statistic -> smean[style="dashed"];
+  statistic -> srate[style="dashed"];
+
+  distribution -> statistic;
+
+  clt[label="中心极限定理"]
+
+  smean -> clt[label="大样本:\n n >= 30"];
+  srate -> clt[label="大样本:\n n >= 30"];
+
+  clt -> norm;
+
+  smean -> t[label="小样本:\n n < 30"];
+  svar -> chisq;
+
+  svarate[label="两个样本方差比的分布"];
+  chisq -> svarate -> F;
+
+  shapiro[label="W检验:\n shapiro.test()"];
+  ks[label="K检验:\n ks.test()"];
+  tt[label="T检验:\n t.test()"];
+  bt[label="二项分布检验:\n binom.test()"];
+  chisq[label="卡方检验:\n chisq.test()"];
+
+  shapiro -> norm;
+  tt -> norm;
+  ks -> F;
+  bt -> binom;
+  chisq -> F;
+
+  cort[label="相关性检验:\n cor.test()"];
+  fisher[label="独立性检验:\n fisher.test()"];
+  mcnemar[label="频数检验:\n mcnemar.test()"];
+  wilcox[label="Wilcoxon秩检验:\n wilcox.test()"];
+
+  cort -> cor;
+  fisher -> cor;
+
+  aov[label="方差分析:\n aov()"];
+  TukeyHSD[label="多重比较:\n TukeyHSD()"];
+
+  aov -> norm;
+  TukeyHSD -> aov;
+}

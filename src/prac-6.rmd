@@ -3,11 +3,9 @@ title: 正态分布
 output: html_document
 ---
 
-```{r echo=F}
-library('ggplot2');
-```
-
 ```{r}
+library('ggplot2');
+
 x <- seq(-10, 10, by = 0.1);
 
 ggplot(data.frame(x = x, y = dnorm(x, 0, 2)), aes(x = x, y = y)) +
