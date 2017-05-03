@@ -113,4 +113,7 @@ digraph pracR{
 
   aov -> norm;
   TukeyHSD -> aov;
+
+  lm[label="拟合:\n lm()"];
+  ts[label="时间序列:\n ts()"]
 }
